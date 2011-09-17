@@ -27,7 +27,8 @@
     var keysOn = true;
     var alreadyRequested;
     var currentTopic = 1;
-    var commentMode = $("title").text().indexOf("|") != -1;
+    var commentMode = $("title").text().indexOf("|") != -1 
+	&& $("title").text().indexOf("New Links") == -1;
     var disableInput = false;
 
     function selectTopics() {
@@ -151,7 +152,8 @@
     function reply() {
 	var link = topic().find("u a").attr("href");
 	if (link) {
-	    window.location.href = link;
+	    link = 'http://news.ycombinator.com/' + link;
+	    chrome.extension.sendRequest({url: link, focus: true, close: false});
 	}
     }
     function previousTopic(n, noanim) {

@@ -17,11 +17,13 @@
         "url":request.url,
         "selected":request.focus,
         "index":sender.tab.index
-       }, function (tab) {
-         chrome.tabs.executeScript(tab.id, {
-           code: "document.addEventListener('keydown', function (event) { if(event.keyCode == 37 && (typeof(keysOn) === 'undefined' || keysOn === true)) self.close(); });"
-         });
-       });
+      }, function (tab) {
+	  if (request.close == undefined || request.close) {
+	      chrome.tabs.executeScript(tab.id, {
+		  code: "document.addEventListener('keydown', function (event) { if(event.keyCode == 37 && (typeof(keysOn) === 'undefined' || keysOn === true)) self.close(); });"
+              });
+	  }
+      });
     }
 );
 
