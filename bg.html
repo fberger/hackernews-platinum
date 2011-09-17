@@ -1,0 +1,30 @@
+<html>
+<head>
+<script>
+  // Called when the url of a tab changes.
+  function checkForValidUrl(tabId, changeInfo, tab) {
+    if (tab.url.indexOf('http://news.ycombinator.com/') > -1) {
+      chrome.pageAction.show(tabId);
+    }
+  };
+  
+  // Listen for any changes to the URL of any tab.
+  chrome.tabs.onUpdated.addListener(checkForValidUrl);
+
+  chrome.extension.onRequest.addListener(
+    function(request, sender, sendResponse) {
+      chrome.tabs.create({
+        "url":request.url,
+        "selected":request.focus,
+        "index":sender.tab.index
+       }, function (tab) {
+         chrome.tabs.executeScript(tab.id, {
+           code: "document.addEventListener('keydown', function (event) { if(event.keyCode == 37 && (typeof(keysOn) === 'undefined' || keysOn === true)) self.close(); });"
+         });
+       });
+    }
+);
+
+</script>
+</head>
+</html>

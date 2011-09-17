@@ -1,0 +1,15 @@
+{
+   "background_page": "bg.html",
+   "content_scripts": [ {
+      "js": [ "jquery-1.4.2.min.js", "jquery-ui-1.8.2.custom.min.js", "jquery.mousewheel.min.js", "content.js" ],
+      "matches": [ "http://news.ycombinator.com/*" ]
+   } ],
+   "description": "Hacker News plugin based on reddit plugin that optimizes reddit keyboard navigation",
+   "icons": {
+      "128": "icon128.png"
+   },
+   "name": "Hacker News platinum",
+   "permissions": [ "tabs", "http://*/*" ],
+   "update_url": "http://clients2.google.com/service/update2/crx",
+   "version": "0.1"
+}
