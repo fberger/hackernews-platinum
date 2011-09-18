@@ -39,6 +39,7 @@
 	return $("td[class=default]");
     }
 
+    // If on a page for writing a comment, just focus on textarea and return.
     if (commentMode && $("title").text().indexOf("| Add Comment") != -1) {
 	$("textarea").focus();
 	return;
