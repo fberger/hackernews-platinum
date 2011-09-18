@@ -2,6 +2,7 @@
 <head>
 <script src="analytics.js"></script>
 <script>
+    trackPageView('/bg.html');
   // Called when the url of a tab changes.
   function checkForValidUrl(tabId, changeInfo, tab) {
     if (tab.url.indexOf('http://news.ycombinator.com/') > -1) {
@@ -14,19 +15,22 @@
 
   chrome.extension.onRequest.addListener(
     function(request, sender, sendResponse) {
-      chrome.tabs.create({
-        "url":request.url,
-        "selected":request.focus,
-        "index":sender.tab.index
-      }, function (tab) {
-	  if (request.close == undefined || request.close) {
-	      chrome.tabs.executeScript(tab.id, {
-		  code: "document.addEventListener('keydown', function (event) { if(event.keyCode == 37 && (typeof(keysOn) === 'undefined' || keysOn === true)) self.close(); });"
-              });
-	  }
-      });
-    }
-);
+	if (request.type == "openLink") {
+	    chrome.tabs.create({
+		"url":request.data.url,
+		"selected":request.data.focus,
+		"index":sender.tab.index
+	    }, function (tab) {
+		if (request.data.close == undefined || request.data.close) {
+		    chrome.tabs.executeScript(tab.id, {
+			code: "document.addEventListener('keydown', function (event) { if(event.keyCode == 37 && (typeof(keysOn) === 'undefined' || keysOn === true)) self.close(); });"
+		    });
+		}
+	    });
+	} else if (request.type == "track") {
+	    _gaq.push(request.data);
+	}
+    });
 
 </script>
 </head>

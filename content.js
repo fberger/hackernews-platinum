@@ -31,6 +31,8 @@
 	&& $("title").text().indexOf("New Links") == -1;
     var disableInput = false;
 
+    track(["_trackPageview", "/content.js"]);
+
     function selectTopics() {
 	return $("td[class=title] > a").parent();
     }
@@ -128,13 +130,26 @@
 	}
 	isUpsideDown = false;
     }
+    function openLink(data) {
+	chrome.extension.sendRequest({type: "openLink", data: data});
+    }
+    function track(args) {
+	chrome.extension.sendRequest({type: "track", data: args});
+    }
+    function trackListAction(type) {
+	track(['_trackEvent', 'usage', 'list', type]);
+    }
+    function trackItemAction(type) {
+	track(['_trackEvent', 'usage', 'item', type]);
+    }
     function openCurrent(shift) {
 	var link = topic().find("a").attr("href");
 	if(!link) return;
 	if (link.match('item')) {
 	    link = 'http://news.ycombinator.com/' + link;
 	}
-	chrome.extension.sendRequest({url: link, focus: !shift});
+	openLink({url: link, focus: !shift});
+	trackItemAction("open-link");
     }
     function openCurrentComment(shift) {
 	var link = topic().parent().next().find("a").last().attr("href");
@@ -142,10 +157,12 @@
 	if (link.match('item')) {
 	    link = 'http://news.ycombinator.com/' + link;
 	}
-	chrome.extension.sendRequest({url: link, focus: !shift});
+	openLink({url: link, focus: !shift});
+	trackItemAction("open-comment");
     }
     function upvote() {
 	topic().parent().find("td > center > a").click();
+	trackItemAction("upvote");
     }
     function downvote() {
 	
@@ -154,10 +171,12 @@
 	var link = topic().find("u a").attr("href");
 	if (link) {
 	    link = 'http://news.ycombinator.com/' + link;
-	    chrome.extension.sendRequest({url: link, focus: true, close: false});
+	    openLink({url: link, focus: true, close: false});
 	}
+	trackItemAction("reply");
     }
     function previousTopic(n, noanim) {
+	trackListAction("previous-" + n); 
 	if(currentTopic < 1 + n) {
 	    return;
 	}
@@ -167,6 +186,7 @@
 	if(!noanim) highlightCurrentTopic();
     }
     function nextTopic(n, noanim) {
+	trackListAction("next-" + n); 
 	if(currentTopic + n > topics.length ) return;
 	if(!noanim) lowlightCurrentTopic();
 	currentTopic += n;
@@ -174,12 +194,14 @@
 	if(!noanim) highlightCurrentTopic();
     }
     function firstTopic() {
+	trackListAction("first");
 	lowlightCurrentTopic();
 	currentTopic = 1;
 	highlightCurrentTopic();
 	scrollToCurrentTopic(false);
     }
     function lastTopic() {
+	trackListAction("last");
 	lowlightCurrentTopic();
 	currentTopic = topics.length;
 	scrollToCurrentTopic(true);
@@ -198,7 +220,7 @@
     }
 
     function keyd(event) {
-	if(event.keyCode == 32 && event.altKey) {
+	if(/*event.keyCode == 32 && */event.altKey) {
 	    disableInput = !disableInput;
 	    return true;
 	}
@@ -206,6 +228,8 @@
 	if(event.keyCode == 38) { // Up
 	    if(event.ctrlKey) {
 		upvote();
+	    } else if (event.altKey) {
+		return true;
 	    } else {
 		if(commentMode) {
 		    if(event.shiftKey) previousSibling();
@@ -217,6 +241,9 @@
 	} else if (event.keyCode == 40) { //Down
 	    if(event.ctrlKey) {
 		downvote();
+	    } else if (event.altKey) {
+		console.log("alt key pressed");
+		return true;
 	    } else {
 		if(commentMode) {
 		    if(event.shiftKey) nextSibling();
