@@ -136,9 +136,6 @@
     function track(args) {
 	chrome.extension.sendRequest({type: "track", data: args});
     }
-    function trackListAction(type) {
-	track(['_trackEvent', 'usage', 'list', type]);
-    }
     function trackItemAction(type) {
 	track(['_trackEvent', 'usage', 'item', type]);
     }
@@ -176,7 +173,6 @@
 	trackItemAction("reply");
     }
     function previousTopic(n, noanim) {
-	trackListAction("previous-" + n); 
 	if(currentTopic < 1 + n) {
 	    return;
 	}
@@ -186,7 +182,6 @@
 	if(!noanim) highlightCurrentTopic();
     }
     function nextTopic(n, noanim) {
-	trackListAction("next-" + n); 
 	if(currentTopic + n > topics.length ) return;
 	if(!noanim) lowlightCurrentTopic();
 	currentTopic += n;
@@ -194,14 +189,12 @@
 	if(!noanim) highlightCurrentTopic();
     }
     function firstTopic() {
-	trackListAction("first");
 	lowlightCurrentTopic();
 	currentTopic = 1;
 	highlightCurrentTopic();
 	scrollToCurrentTopic(false);
     }
     function lastTopic() {
-	trackListAction("last");
 	lowlightCurrentTopic();
 	currentTopic = topics.length;
 	scrollToCurrentTopic(true);
@@ -220,7 +213,7 @@
     }
 
     function keyd(event) {
-	if(/*event.keyCode == 32 && */event.altKey) {
+	if(event.keyCode == 32 && event.altKey) {
 	    disableInput = !disableInput;
 	    return true;
 	}

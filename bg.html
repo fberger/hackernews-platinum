@@ -1,19 +1,29 @@
-<html>
-<head>
-<script src="analytics.js"></script>
-<script>
-    trackPageView('/bg.html');
-  // Called when the url of a tab changes.
-  function checkForValidUrl(tabId, changeInfo, tab) {
-    if (tab.url.indexOf('http://news.ycombinator.com/') > -1) {
-      chrome.pageAction.show(tabId);
-    }
-  };
-  
-  // Listen for any changes to the URL of any tab.
-  chrome.tabs.onUpdated.addListener(checkForValidUrl);
+    <html>
+    <head>
+    <script src="analytics.js"></script>
+    <script>
+trackPageView('/bg.html');
 
-  chrome.extension.onRequest.addListener(
+function toCode(f) {
+    return "(" + f.toString() + ")();";
+}
+
+function installCloseHandler() {
+    document.addEventListener('keydown', function (event) { 
+	if(event.keyCode == 37 && (typeof(keysOn) === 'undefined' 
+				   || keysOn === true)) {
+	    chrome.extension.sendRequest({type: "track", 
+					  data: ['_trackEvent', 'usage', 
+						 'item', 'close-tab']});
+	    self.close();
+	}
+    });
+}
+
+// Listen for any changes to the URL of any tab.
+chrome.tabs.onUpdated.addListener(checkForValidUrl);
+
+chrome.extension.onRequest.addListener(
     function(request, sender, sendResponse) {
 	if (request.type == "openLink") {
 	    chrome.tabs.create({
@@ -23,11 +33,12 @@
 	    }, function (tab) {
 		if (request.data.close == undefined || request.data.close) {
 		    chrome.tabs.executeScript(tab.id, {
-			code: "document.addEventListener('keydown', function (event) { if(event.keyCode == 37 && (typeof(keysOn) === 'undefined' || keysOn === true)) self.close(); });"
+			code: toCode(installCloseHandler)
 		    });
 		}
 	    });
 	} else if (request.type == "track") {
+	    console.log("track", request.data);
 	    _gaq.push(request.data);
 	}
     });
