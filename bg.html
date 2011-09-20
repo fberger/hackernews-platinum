@@ -38,7 +38,6 @@ chrome.extension.onRequest.addListener(
 		}
 	    });
 	} else if (request.type == "track") {
-	    console.log("track", request.data);
 	    _gaq.push(request.data);
 	}
     });
