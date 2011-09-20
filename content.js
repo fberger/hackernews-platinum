@@ -235,7 +235,6 @@
 	    if(event.ctrlKey) {
 		downvote();
 	    } else if (event.altKey) {
-		console.log("alt key pressed");
 		return true;
 	    } else {
 		if(commentMode) {
