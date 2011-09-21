@@ -9,13 +9,19 @@ function toCode(f) {
 }
 
 function installCloseHandler() {
+    var rightPressed = false;
     document.addEventListener('keydown', function (event) { 
-	if(event.keyCode == 37 && (typeof(keysOn) === 'undefined' 
-				   || keysOn === true)) {
-	    chrome.extension.sendRequest({type: "track", 
-					  data: ['_trackEvent', 'usage', 
-						 'item', 'close-tab']});
-	    self.close();
+	// Only close tab if user didn't scroll to the right.
+	if (event.keyCode == 39) {
+	    rightPressed = true;
+	} else if (!rightPressed || event.altKey) {
+	    if (event.keyCode == 37
+		&& (typeof(keysOn) === 'undefined' || keysOn === true)) {
+		chrome.extension.sendRequest({type: "track",
+					      data: ['_trackEvent', 'usage', 
+						     'item', 'close-tab']});
+		self.close();
+	    }
 	}
     });
 }
