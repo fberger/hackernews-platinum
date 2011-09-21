@@ -256,7 +256,6 @@
 	    hideTopic();
 	} else if(event.keyCode == 13 || event.keyCode == 39) { // Enter or Right
 	    if(commentMode) {
-		reply();
 		//	    nextParent();
 	    } else {
 		openCurrent(event.shiftKey);
@@ -268,7 +267,8 @@
 		openCurrentComment(event.shiftKey);
 	    }
 	} else if(event.keyCode == 32) { // Space
-	    expando();
+	    //expando();
+	    reply();
 	} else if(event.keyCode == 27) { // Escape
 	    self.close();
 	} else {
