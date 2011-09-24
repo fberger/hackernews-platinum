@@ -218,7 +218,7 @@
 	    return true;
 	}
 	if(!keysOn || disableInput) return true;
-	if(event.keyCode == 38) { // Up
+	if(event.keyCode == 38 || event.keyCode == 75) { // Up or 'k'
 	    if(event.ctrlKey) {
 		upvote();
 	    } else if (event.altKey) {
@@ -231,7 +231,7 @@
 		    previousTopic(1);
 		}
 	    }
-	} else if (event.keyCode == 40) { //Down
+	} else if (event.keyCode == 40 || event.keyCode == 74 ) { //Down or 'j'
 	    if(event.ctrlKey) {
 		downvote();
 	    } else if (event.altKey) {
@@ -254,15 +254,16 @@
 	    lastTopic();
 	} else if(event.keyCode == 46) { // Del
 	    hideTopic();
-	} else if(event.keyCode == 13 || event.keyCode == 39) { // Enter or Right
+	} else if(event.keyCode == 13 || event.keyCode == 39
+		  || event.keyCode == 79 || event.keyCode == 78) { // Enter or Right, or 'o', or 'n'
 	    if(commentMode) {
-		//	    nextParent();
+		nextTopLevelComment();
 	    } else {
 		openCurrent(event.shiftKey);
 	    }
-	} else if(event.keyCode == 37) { // Left
+	} else if(event.keyCode == 37 || event.keyCode == 80) { // Left or 'p'
 	    if(commentMode) {
-		previousParent();
+		previousToplevelComment();
 	    } else {
 		openCurrentComment(event.shiftKey);
 	    }
@@ -344,6 +345,32 @@
 	}
 	currentTopic = oldCurrentTopic;
 	highlightCurrentTopic();
+    }
+
+    function nextTopLevelComment() {
+	var left = $(topics[0]).offset().left;
+	for (var i = currentTopic; i < topics.length; ++i) {
+	    if ($(topics[i]).offset().left == left) {
+		lowlightCurrentTopic();
+		currentTopic = i + 1;
+		scrollToCurrentTopic(true);
+		highlightCurrentTopic();
+		break;
+	    }
+	}
+    }
+
+    function previousToplevelComment() {
+	var left = $(topics[0]).offset().left;
+	for (var i = currentTopic - 2; i >= 0; --i) {
+	    if ($(topics[i]).offset().left == left) {
+		lowlightCurrentTopic();
+		currentTopic = i + 1;
+		scrollToCurrentTopic(true);
+		highlightCurrentTopic();
+		break;
+	    }
+	}
     }
 
     function nextParent() {
