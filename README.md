@@ -4,6 +4,8 @@ This extension is based on the excellent reddit-plantinum extension by Mournier 
 
 https://chrome.google.com/webstore/detail/lgdabokohpkanioglmfikbhclpknccla?hc=search&hcp=main
 
+Press ? to show keyboard shortcuts help.
+
 On links page:
 
   * Up               -> Previous link
@@ -23,6 +25,8 @@ On comment page:
   * Ctrl + Up        -> Upvote comment
   * Space            -> Reply to comment in new tab
   * Left             -> Closes comment tab and brings you back to links page
+  * Right or n       -> Go to next top-level comment.
+  * p or Left        -> Go to previous top-level comment.
   * Page Up          -> Go up by 5 comments
   * Page Down        -> Go down by 5 comments
   * Home             -> To first comment
@@ -30,3 +34,5 @@ On comment page:
 
 Mouse scroll behaves like up and down arrow.
 Alt + Scroll behaves as normal.
+
+Project at: http://github.com/fberger/hackernews-navigation/
