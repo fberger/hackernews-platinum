@@ -278,8 +278,6 @@
 	} else if(event.keyCode == 32) { // Space
 	    //expando();
 	    reply();
-	} else if(event.keyCode == 27) { // Escape
-	    self.close();
 	} else {
 	    return true;
 	}

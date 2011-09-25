@@ -21,7 +21,7 @@ On comment page:
   * Up               -> Previous comment
   * Down             -> Next comment
   * Ctrl + Up        -> Upvote comment
-  * Right            -> Reply to comment in new tab
+  * Space            -> Reply to comment in new tab
   * Left             -> Closes comment tab and brings you back to links page
   * Page Up          -> Go up by 5 comments
   * Page Down        -> Go down by 5 comments

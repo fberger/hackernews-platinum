@@ -49,3 +49,17 @@
 #footer { 
  clear: both;
 }
+#help-link { 
+ -webkit-transform: rotate(-90deg); 
+ position: fixed;
+ top: 45%;
+ vertical-align:center;
+ width: 170px;
+ margin: 0 0 0 -90px;
+ z-index: 999;
+ border: solid 1px black;
+ font-weight: bold;
+ font-family: non-serif, Arial;
+ background-color: #ddd;
+ padding: 10px;
+}
