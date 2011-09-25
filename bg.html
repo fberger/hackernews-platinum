@@ -1,6 +1,7 @@
     <html>
     <head>
     <script src="analytics.js"></script>
+    <script src="jquery-1.4.2.min.js"></script>
     <script>
 trackPageView('/bg.html');
 
@@ -42,9 +43,14 @@ chrome.extension.onRequest.addListener(
 	    });
 	} else if (request.type == "track") {
 	    _gaq.push(request.data);
+	} else if (request.type == "get") {
+	    var url = chrome.extension.getURL(request.data.resource);
+	    console.log("bg url", url);
+	    $.get(url, function(data) {
+		sendResponse(data);
+	    });
 	}
     });
-
 </script>
 </head>
 </html>

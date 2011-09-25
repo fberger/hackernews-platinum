@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15">
+<title></title>
+<link rel="stylesheet" type="text/css" href="help.css"/>
+<script type="text/javascript">
+function overlay() {
+ el = document.getElementById("overlay");
+ console.log(el.style.visibility);
+ el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
+}
+</script>
+</head>
+
+<body>
+<h1></h1>
+
+<div id="overlay">
+<div id="dialog">
+<div id="close-link">
+<a href="#" onclick="overlay();">Close</a>
+</div>
+<div id="links-table">
+  <h2>On links page<h2>
+  <table>
+    <tr>
+      <td><span>Down</span></td>
+      <td>Next link</td>
+    </tr>
+    <tr>
+      <td><span>Up</span></td>
+      <td>Previous link</td>
+    </tr>
+    <tr>
+      <td><span>Right</span> or <span>Enter</span></td>
+      <td>Open link in new tab (Hold Shift to open tab in background)</td>
+    </tr>
+    <tr>
+      <td><span>Left</span></td>
+      <td>Open comments in new tab</td>
+    </tr>
+    <tr>
+      <td><span>Ctrl + Up</span></td>
+      <td>Upvote</td>
+    </tr>
+  </table>
+</div>
+<div id="commments-table">
+  <h2>On comments page</h2>
+  <table>
+    <tr>
+      <td><span>Up</span></td>
+      <td>Previous comment</td>
+    </tr>
+    <tr>
+      <td><span>Down</span></td>
+      <td>Next comment</td>
+    </tr>
+    <tr>
+      <td><span>Ctrl + Up</span></td>
+      <td>Upvote comment</td>
+    </tr>
+    <tr>
+      <td><span>Space</span></td>
+      <td>Reply to comment in new tab</td>
+    </tr>
+    <tr>
+      <td><span>Left</span></td>
+      <td>Close comment tab and go back to links page</td>
+    </tr>
+    <tr>
+      <td><span>Right</span> or <span>n</span></td>
+      <td>Next toplevel comment</td>
+    </tr>
+    <tr>
+      <td><span>p</span></td>
+      <td>Previous toplevel comment</td>
+    </tr>
+  </table>
+</div>
+<div id="footer">
+</div>
+</div>
+</div>
+
+
+<hr>
+<address></address>
+<!-- hhmts start -->Last modified: Sat Sep 24 23:16:54 EDT 2011 <!-- hhmts end -->
+</body> </html>

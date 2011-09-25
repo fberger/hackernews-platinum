@@ -1,130 +1,64 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15">
-<title></title>
-<style type="text/css">
-body {
- font-family: sans-serif, Arial;
-}
-td {
- font-size: 12pt;
- font-weight: bold;
- vertical-align: top;
-}
-td:first-child {
- padding: 0 10px 0 0;
- width: 110px;
-}
-td:first-child>span { 
- color: #FF6500;
-}
-#overlay {
- position: absolute;
- left: 0;
- top: 0;
- width: 100%;
- height: 100%;
- z-index: 1000;
- background-color: rgba(0, 0, 0, 0.5);
-}
-#dialog {
- position: relative;
- width: 860px;
- margin: 50px auto;
- background-color: #ddd;
- border: 1px solid black;
- padding: 15px;
-}
-#close-link { 
- position: absolute;
- right: 15px;
- top: 15px;
-}
-#links-table { 
- float: left;
- width: 420px;
-}
-#commments-table { 
- float: right;
- width: 420px;
-}
-#footer { 
- clear: both;
-}
-</style>
-<script type="text/javascript">
-function overlay() {
- el = document.getElementById("overlay");
- console.log(el.style.visibility);
- el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
-}
-</script>
-</head>
-
-<body>
-<h1></h1>
-
-<div id="overlay">
+<div id="overlay" style="display: none;">
 <div id="dialog">
+  <h3 id="dialog-title">Keyboard shortcuts</h3>
 <div id="close-link">
-<a href="#" onclick="overlay();">Close</a>
+  <a id="close-button" href="#">Close</a>
 </div>
 <div id="links-table">
-  <h2>On links page<h2>
+  <h3>On links page<h3>
   <table>
     <tr>
-      <td><span>Down</span></td>
-      <td>Next link</td>
+      <td class="comment"><span>Down</span></td>
+      <td class="comment">Next link</td>
     </tr>
     <tr>
-      <td><span>Up</span></td>
-      <td>Previous link</td>
+      <td class="comment"><span>Up</span></td>
+      <td class="comment">Previous link</td>
     </tr>
     <tr>
-      <td><span>Right</span> or <span>Enter</span></td>
-      <td>Open link in new tab (Hold Shift to open tab in background)</td>
+      <td class="comment"><span>Right</span> or <span>Enter</span></td>
+      <td class="comment">Open link in new tab (Hold Shift to open tab in background)</td>
     </tr>
     <tr>
-      <td><span>Left</span></td>
-      <td>Open comments in new tab</td>
+      <td class="comment"><span>Left</span></td>
+      <td class="comment">Open comments in new tab</td>
     </tr>
     <tr>
-      <td><span>Ctrl + Up</span></td>
-      <td>Upvote</td>
+      <td class="comment"><span>Ctrl + Up</span></td>
+      <td class="comment">Upvote</td>
     </tr>
   </table>
 </div>
 <div id="commments-table">
-  <h2>On comments page</h2>
+  <h3>On comments page</h3>
   <table>
     <tr>
-      <td><span>Up</span></td>
-      <td>Previous comment</td>
+      <td class="comment"><span>Up</span></td>
+      <td class="comment">Previous comment</td>
     </tr>
     <tr>
-      <td><span>Down</span></td>
-      <td>Next comment</td>
+      <td class="comment"><span>Down</span></td>
+      <td class="comment">Next comment</td>
     </tr>
     <tr>
-      <td><span>Ctrl + Up</span></td>
-      <td>Upvote comment</td>
+      <td class="comment"><span>Ctrl + Up</span></td>
+      <td class="comment">Upvote comment</td>
     </tr>
     <tr>
-      <td><span>Space</span></td>
-      <td>Reply to comment in new tab</td>
+      <td class="comment"><span>Space</span></td>
+      <td class="comment">Reply to comment in new tab</td>
     </tr>
     <tr>
-      <td><span>Left</span></td>
-      <td>Close comment tab and go back to links page</td>
+      <td class="comment"><span>Left</span></td>
+      <td class="comment">Close comment tab and go back to links page</td>
     </tr>
     <tr>
-      <td><span>Right</span> or <span>n</span></td>
-      <td>Next toplevel comment</td>
+      <td class="comment"><span>Right</span> or <span>n</span></td>
+      <td class="comment">Next toplevel comment</td>
     </tr>
     <tr>
-      <td><span>p</span></td>
-      <td>Previous toplevel comment</td>
+      <td class="comment"><span>p</span></td>
+      <td class="comment">Previous toplevel comment</td>
     </tr>
   </table>
 </div>
@@ -132,9 +66,3 @@ function overlay() {
 </div>
 </div>
 </div>
-
-
-<hr>
-<address></address>
-<!-- hhmts start -->Last modified: Sat Sep 24 14:34:48 EDT 2011 <!-- hhmts end -->
-</body> </html>

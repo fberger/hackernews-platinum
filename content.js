@@ -212,6 +212,10 @@
 	else topic().children("div.entry").children("div.expando-button").click();
     }
 
+    function hasModifiers(event) {
+	return event.shiftKey || event.ctrlKey || event.altKey;
+    }
+
     function keyd(event) {
 	if(event.keyCode == 32 && event.altKey) {
 	    disableInput = !disableInput;
@@ -231,7 +235,11 @@
 		    previousTopic(1);
 		}
 	    }
-	} else if (event.keyCode == 40 || event.keyCode == 74 ) { //Down or 'j'
+	} else if (event.keyCode == 40 || event.keyCode == 74) { //Down or 'j'
+	    if (event.keyCode == 74 && hasModifiers(event)) {
+		// Don't handle if there are modifiers.
+		return true;
+	    }
 	    if(event.ctrlKey) {
 		downvote();
 	    } else if (event.altKey) {
