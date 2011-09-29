@@ -20,7 +20,7 @@
 }
 #dialog {
  position: relative;
- width: 800px;
+ width: 84%;
  margin: 50px auto;
  background-color: #ddd;
  border: 1px solid black;
@@ -38,13 +38,18 @@
 }
 #links-table { 
  float: left;
- width: 380px;
+ width: 48%;
  margin: 15px 0 0 0;
+ text-align: left;
+}
+#dialog h3 {
+ text-align: left;
 }
 #commments-table { 
  float: right;
- width: 380px;
+ width: 48%;
  margin: 15px 0 0 0;
+ text-align: left;
 }
 #footer { 
  clear: both;
