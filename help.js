@@ -4,6 +4,10 @@ link.href = chrome.extension.getURL("/help.css");
 link.rel = 'stylesheet';
 document.body.appendChild(link);
 
+function track(args) {
+    chrome.extension.sendRequest({type: "track", data: args});
+}
+
 chrome.extension.sendRequest(
     {type: "get", data: { resource: "/help.html" }},
     function(data) {
@@ -12,6 +16,7 @@ chrome.extension.sendRequest(
 	    $('#overlay').hide();
 	});
 	$('#open-help').click(function() {
+	    track(['_trackEvent', 'usage', 'help', 'help-link']);
 	    $('#overlay').show();
 	});
 	if (localStorage.helpV2 == undefined || localStorage.helpV2 < 5) {
@@ -23,6 +28,7 @@ chrome.extension.sendRequest(
 
 $(document).keydown(function(event) {
     if (event.shiftKey && event.keyCode == 191) { // Shift + Slash = ?
+	track(['_trackEvent', 'usage', 'help', 'help-key']);
 	$('#overlay').show();
 	event.preventDefault();
 	return true;
