@@ -9,7 +9,7 @@
       "128": "icon128.png"
    },
    "name": "Hacker News platinum",
-   "permissions": [ "tabs", "http://*/*" ],
+   "permissions": [ "tabs", "http://*/*", "https://*/*" ],
    "update_url": "http://clients2.google.com/service/update2/crx",
-   "version": "3"
+   "version": "4"
 }

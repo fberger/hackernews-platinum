@@ -14,9 +14,9 @@ chrome.extension.sendRequest(
 	$('#open-help').click(function() {
 	    $('#overlay').show();
 	});
-	var seen = localStorage.helpV1;
-	if (seen == 'undefined' || seen < 5) {
-	    localStorage.helpV1 = seen == 'undefined' ? 1 : ++seen;
+	if (localStorage.helpV2 == undefined || localStorage.helpV2 < 5) {
+	    localStorage.helpV2 =
+		localStorage.helpV2 == undefined ? 1 : ++(localStorage.helpV2);
 	    $('#help-link').show();
 	}
     });
