@@ -11,5 +11,5 @@
    "name": "Hacker News platinum",
    "permissions": [ "tabs", "http://*/*", "https://*/*" ],
    "update_url": "http://clients2.google.com/service/update2/crx",
-   "version": "6"
+   "version": "7"
 }
