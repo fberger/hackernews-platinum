@@ -157,12 +157,18 @@
 	openLink({url: link, focus: !shift});
 	trackItemAction("open-comment");
     }
+    function openLinkInCurrentComment(shift) {
+	var link = topic().find(".comment :not(u) > a").first().attr("href");
+	if (link) {
+	    openLink({url: link, focus: !shift});
+	}
+	trackItemAction("open-link-in-comment");
+    }
     function upvote() {
 	topic().parent().find("td > center > a").click();
 	trackItemAction("upvote");
     }
     function downvote() {
-	
     }
     function reply() {
 	var link = topic().find("u a").attr("href");
@@ -262,10 +268,15 @@
 	    lastTopic();
 	} else if(event.keyCode == 46) { // Del
 	    hideTopic();
-	} else if(event.keyCode == 13 || event.keyCode == 39
-		  || event.keyCode == 79 || event.keyCode == 78) { // Enter or Right, or 'o', or 'n'
+	} else if(event.keyCode == 39 || event.keyCode == 78) { // Right or 'n'
 	    if(commentMode) {
 		nextTopLevelComment();
+	    } else {
+		openCurrent(event.shiftKey);
+	    }
+	} else if (event.keyCode == 13 || event.keyCode == 79) { // Enter or 'o'
+	    if (commentMode) {
+		openLinkInCurrentComment(event.shiftKey);
 	    } else {
 		openCurrent(event.shiftKey);
 	    }

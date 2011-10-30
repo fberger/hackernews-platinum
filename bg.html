@@ -45,7 +45,6 @@ chrome.extension.onRequest.addListener(
 	    _gaq.push(request.data);
 	} else if (request.type == "get") {
 	    var url = chrome.extension.getURL(request.data.resource);
-	    console.log("bg url", url);
 	    $.get(url, function(data) {
 		sendResponse(data);
 	    });
