@@ -142,7 +142,7 @@
     function openCurrent(shift) {
 	var link = topic().find("a").attr("href");
 	if(!link) return;
-	if (link.match('item')) {
+	if (link.match('^item')) {
 	    link = 'http://news.ycombinator.com/' + link;
 	}
 	openLink({url: link, focus: !shift});
@@ -151,7 +151,7 @@
     function openCurrentComment(shift) {
 	var link = topic().parent().next().find("a").last().attr("href");
 	if(!link) return;
-	if (link.match('item')) {
+	if (link.match('^item')) {
 	    link = 'http://news.ycombinator.com/' + link;
 	}
 	openLink({url: link, focus: !shift});
