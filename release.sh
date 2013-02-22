@@ -36,9 +36,6 @@ mkdir $output_dir
 echo "Archiving"
 git archive $version | tar -x -C $output_dir
 
-echo "Packing for github upload"
-google-chrome --pack-extension=$output_dir --pack-extension-key=$PRIVATE_KEY
-
 echo "Copying private key"
 cp $PRIVATE_KEY $output_dir/key.pem
 
