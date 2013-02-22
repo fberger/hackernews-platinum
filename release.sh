@@ -15,7 +15,7 @@ fi
 echo "Releasing version ${version}"
 
 echo "Setting version number in manifest.json"
-sed -i "s/version\":.*/version\": \"${version}\"/" manifest.json
+sed -i "s/\"version\":.*/\"version\": \"${version}\"/" manifest.json
 
 if [[ $(git diff | grep manifest.json) ]]; then
     echo "Committing changes"
@@ -35,6 +35,9 @@ mkdir $output_dir
 
 echo "Archiving"
 git archive $version | tar -x -C $output_dir
+
+echo "Packing for github upload"
+google-chrome --pack-extension=$output_dir --pack-extension-key=$PRIVATE_KEY
 
 echo "Copying private key"
 cp $PRIVATE_KEY $output_dir/key.pem
