@@ -89,7 +89,7 @@
 	throw "No topics found";
     }
     $(document).keydown(keyd);
-    $(document).mousewheel(scrolld);
+//    $(document).mousewheel(scrolld);
 
     topics.css({border: '1px solid #f6f6ef'});
     highlightCurrentTopic();
@@ -149,7 +149,7 @@
 	trackItemAction("open-link");
     }
     function openCurrentComment(shift) {
-	var link = topic().parent().next().find("a").last().attr("href");
+	var link = topic().parent().next().find('a[href*=item\\?id]').last().attr("href");
 	if(!link) return;
 	if (link.match('^item')) {
 	    link = 'http://news.ycombinator.com/' + link;
