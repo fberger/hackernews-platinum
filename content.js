@@ -89,7 +89,7 @@
 	throw "No topics found";
     }
     $(document).keydown(keyd);
-//    $(document).mousewheel(scrolld);
+    $(document).mousewheel(scrolld);
 
     topics.css({border: '1px solid #f6f6ef'});
     highlightCurrentTopic();
