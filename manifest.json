@@ -10,7 +10,7 @@
     },
     "content_scripts": [ {
 	"js": [ "jquery-1.9.1.min.js", "jquery-ui-1.10.1.custom.min.js", "jquery.mousewheel.js", "content.js", "help.js" ],
-	"matches": [ "http://news.ycombinator.com/*" ]
+	"matches": [ "*://news.ycombinator.com/*" ]
     } ],
     "web_accessible_resources": [
 	"help.css"
